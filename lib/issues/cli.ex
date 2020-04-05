@@ -46,10 +46,17 @@ defmodule Issues.CLI do
     System.halt(0)
   end
 
-  defp process({user, project, _count}) do
+  defp process({user, project, count}) do
     Issues.GithubIssues.fetch(user, project)
     |> decode_response()
     |> sort_issues()
+    |> take_last(count)
+  end
+
+  defp take_last(list, count) do
+    list
+    |> Enum.take(count)
+    |> Enum.reverse()
   end
 
   defp decode_response({:ok, body}), do: body

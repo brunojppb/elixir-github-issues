@@ -49,12 +49,20 @@ defmodule Issues.CLI do
   defp process({user, project, _count}) do
     Issues.GithubIssues.fetch(user, project)
     |> decode_response()
+    |> sort_issues()
   end
 
-  def decode_response({:ok, body}), do: body
+  defp decode_response({:ok, body}), do: body
 
-  def decode_response({:error, error}) do
+  defp decode_response({:error, error}) do
     IO.puts("Error fetching from Github #{error[:message]}")
     System.halt(0)
+  end
+
+  def sort_issues(issues) do
+    issues
+    |> Enum.sort(fn lhs, rhs ->
+      lhs["created_at"] >= rhs["created_at"]
+    end)
   end
 end

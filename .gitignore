@@ -27,3 +27,6 @@ issues-*.tar
 
 # Elixir Dialyser
 .elixir_ls/
+
+# VS Code
+/.vscode

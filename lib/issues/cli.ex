@@ -1,5 +1,13 @@
 defmodule Issues.CLI do
+  import Issues.TableFormatter, only: [print_table_for_columns: 2]
+
   @default_count 4
+
+  def main(argv) do
+    argv
+    |> parse_args
+    |> process
+  end
 
   @moduledoc """
   Handle the command line parsing and the dispatch to
@@ -51,6 +59,7 @@ defmodule Issues.CLI do
     |> decode_response()
     |> sort_issues()
     |> take_last(count)
+    |> print_table_for_columns(["number", "created_at", "title"])
   end
 
   defp take_last(list, count) do

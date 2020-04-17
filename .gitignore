@@ -30,3 +30,6 @@ issues-*.tar
 
 # VS Code
 /.vscode
+
+# Intellij
+/.idea

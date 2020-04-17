@@ -39,3 +39,11 @@ mix escript.build
 #        github user | project | number of issues to fetch 
 ./issues elixir-lang elixir 10
 ```
+
+## Generate Docs
+
+```shell
+mix docs
+```
+
+Go to `docs/index.html` to read it.
